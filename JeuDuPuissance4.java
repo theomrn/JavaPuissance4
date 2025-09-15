@@ -12,62 +12,6 @@ public class JeuDuPuissance4 {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
-		/* test show grid function 
-		grid[1][1] = 2;
-		grid[0][0] = 1;
-		System.out.println();
-		afficheGrille(grid,width,height);
-		
-		// test winGridFunction
-		// test top right
-		grid[0][0] = 1;
-		grid[1][1] = 1;
-		grid[2][2] = 1;
-		grid[3][3] = 0;
-		afficheGrille(grid,width,height);
-		System.out.println(grilleGagnante(grid));
-		grid[0][0] = 0;
-		grid[1][1] = 0;
-		grid[2][2] = 0;
-		grid[3][3] = 0;
-		
-		// test top 
-		grid[0][0] = 1;
-		grid[1][0] = 1;
-		grid[2][0] = 1;
-		grid[3][0] = 1;
-		afficheGrille(grid,width,height);
-		System.out.println(grilleGagnante(grid));
-		grid[0][0] = 0;
-		grid[1][0] = 0;
-		grid[2][0] = 0;
-		grid[3][0] = 0;
-		
-		// test top left  
-		grid[0][3] = 1;
-		grid[1][2] = 1;
-		grid[2][1] = 1;
-		grid[3][0] = 2;
-		afficheGrille(grid,width,height);		
-		System.out.println(grilleGagnante(grid));
-		grid[0][3] = 0;
-		grid[1][2] = 0;
-		grid[2][1] = 0;
-		grid[3][0] = 0;
-		
-		// test right  
-		grid[0][0] = 1;
-		grid[1][0] = 1;
-		grid[2][0] = 1;
-		grid[3][0] = 1;
-		afficheGrille(grid,width,height);		
-		System.out.println(grilleGagnante(grid));
-		grid[0][0] = 0;
-		grid[1][0] = 0;
-		grid[2][0] = 0;
-		grid[3][0] = 0;
-		*/
-		
 		// main program
 		int [][] grid = nouvelleGRille(WIDTH,HEIGHT);
 		boolean isDraw = false;
@@ -116,17 +60,17 @@ public class JeuDuPuissance4 {
 		for (int i = height-1 ; i>=0; i--) {
 			for (int j = 0; j<width ; j++) {
 				if (grid[j][i] == 0) {
-					System.out.print("| |");
+					System.out.print("| ");
 				}
 				else if (grid[j][i] == 1) {
-					System.out.print("|X|");
+					System.out.print("|X");
 				}
 				else {
-					System.out.print("|O|");
+					System.out.print("|O");
 				}
 				
 			}
-			System.out.println();
+			System.out.println("|");
 		}
 	}
 	
@@ -213,11 +157,11 @@ public class JeuDuPuissance4 {
 	public static boolean tourJoueur(Scanner scanner, int [][] grid, String nomJoueur, int couleur) {
 		System.out.println(nomJoueur + " Dans quelle colones voulez vous placer votre jeton");
 		int colone = scanner.nextInt();
-		while (grid[colone][5] != 0) {
-			System.out.println(nomJoueur + " La colone que vous avez choisis est pleine, veillez en donner une autre");
+		while (grid[colone][5] != 0 && (colone > 0 && colone < 8)) {
+			System.out.println(nomJoueur + " La colone que vous avez choisis est pleine ou en dehors de la grille, veillez en donner une autre");
 			colone = scanner.nextInt();
 		}
-		grid = joueJeton(grid,colone,couleur);
+		grid = joueJeton(grid,colone-1,couleur);
 		afficheGrille(grid,WIDTH,HEIGHT);
 		return grilleGagnante(grid);
 	}
